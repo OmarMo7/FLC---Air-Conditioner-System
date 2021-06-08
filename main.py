@@ -46,4 +46,16 @@ def DT_Calculator(DT):
     return Negative, Zero, Positive, Large
 
 
+def EV_Calculator(EV):
+    Low = 0
+    High = 0
 
+    if (130 > EV and EV < 160):
+        Low = 1
+    if (160 > EV and EV < 180):
+        Low = (180 - EV)/20
+    if (170 > EV and EV < 190):
+        High = (EV - 170)/20
+    if (190 > EV and EV < 220):
+        High = 1
+    return Low, High
