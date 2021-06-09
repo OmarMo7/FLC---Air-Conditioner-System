@@ -57,46 +57,56 @@ def EV_Calculator(EV):
     return Low, High
 
 
+def Get_Combinations():
+    Pos_UT = []
+    Pos_DT = []
+    Pos_EV = []
+    for value in Fuzzy_UT:
+        if (value != 0):
+            if (not Pos_UT.__contains__(Fuzzy_UT.index(value))):
+                Pos_UT.append(Fuzzy_UT.index(value))
+            else:
+                lastIndex = Fuzzy_UT.index(value)
+                Pos_UT.append(Fuzzy_UT.index(value, lastIndex+1))
+
+    for value in Fuzzy_DT:
+        if (value != 0):
+            if (not Pos_DT.__contains__(Fuzzy_DT.index(value))):
+                Pos_DT.append(Fuzzy_DT.index(value))
+            else:
+                lastIndex = Fuzzy_DT.index(value)
+                Pos_DT.append(Fuzzy_DT.index(value, lastIndex+1))
+    for value in Fuzzy_EV:
+        if (value != 0):
+            if (not Pos_EV.__contains__(Fuzzy_EV.index(value))):
+                Pos_EV.append(Fuzzy_EV.index(value))
+            else:
+                lastIndex = Fuzzy_EV.index(value)
+                Pos_EV.append(Fuzzy_EV.index(value, lastIndex+1))
+
+    Combinations = []
+    for i in Pos_UT:
+        for j in Pos_DT:
+            for k in Pos_EV:
+                Combinations.append([i, j, k])
+    return Combinations
+
+
+def Get_Minimums(Combinations):
+    min_values = []
+    for i in Combinations:
+        min_values.append(min(Fuzzy_UT[i[0]], Fuzzy_DT[i[1]], Fuzzy_EV[i[2]]))
+    return min_values
+
+
 Fuzzy_UT = UT_Calculator(UT)
 Fuzzy_DT = DT_Calculator(DT)
 Fuzzy_EV = EV_Calculator(EV)
-Pos_UT = []
-Pos_DT = []
-Pos_EV = []
-
-for value in Fuzzy_UT:
-    if (value != 0):
-        if (not Pos_UT.__contains__(Fuzzy_UT.index(value))):
-            Pos_UT.append(Fuzzy_UT.index(value))
-        else:
-            lastIndex = Fuzzy_UT.index(value)
-            Pos_UT.append(Fuzzy_UT.index(value, lastIndex+1))
-for value in Fuzzy_DT:
-    if (value != 0):
-        if (not Pos_DT.__contains__(Fuzzy_DT.index(value))):
-            Pos_DT.append(Fuzzy_DT.index(value))
-        else:
-            lastIndex = Fuzzy_DT.index(value)
-            Pos_DT.append(Fuzzy_DT.index(value, lastIndex+1))
-for value in Fuzzy_EV:
-    if (value != 0):
-        if (not Pos_EV.__contains__(Fuzzy_EV.index(value))):
-            Pos_EV.append(Fuzzy_EV.index(value))
-        else:
-            lastIndex = Fuzzy_EV.index(value)
-            Pos_EV.append(Fuzzy_EV.index(value, lastIndex+1))
-
-print(Pos_UT,
-      Pos_DT,
-      Pos_EV)
 
 
-Combinations = []
-for i in Pos_UT:
-    for j in Pos_DT:
-        for k in Pos_EV:
-            Combinations.append([i, j, k])
 
-print(Combinations)
+
+
+
 # print(["Opt, Pos, Low"], ["Opt, Pos, High"],
 #       ["High, Pos, Low"], ["High, Pos, High"])
