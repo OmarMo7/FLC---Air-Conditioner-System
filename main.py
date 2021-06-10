@@ -104,8 +104,9 @@ Fuzzy_DT = DT_Calculator(DT)
 Fuzzy_EV = EV_Calculator(EV)
 
 
-
-
+# To be taken as input
+Combinations = Get_Combinations()
+Mins = Get_Minimums(Combinations)
 
 
 # print(["Opt, Pos, Low"], ["Opt, Pos, High"],
