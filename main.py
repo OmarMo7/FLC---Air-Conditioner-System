@@ -20,10 +20,23 @@ def check_output(base_rules, inputs):
     return "These inputs are not allowed"
 
 
+def defuzzification(output_values, min_values):
+    low, medium, fast = 0, 0, 0
+    for i in range(len(min_values)):
+        for j in range(2):
+            if output_values[i][j] == 0:
+                low += min_values[i] * 30
+            elif output_values[i][j] == 1:
+                medium += min_values[i] * 60
+            elif output_values[i][j] == 2:
+                fast += min_values[i] * 90
+    return (low + medium + fast) / sum(min_values)
+
+
 def main():
     base_rules = read_filename()
-    check_output(base_rules,  [0.0,  1.0,  1.0])
-
+    # a3ml call llfunctions hna
+    
 
 if __name__ == '__main__':
     main()
