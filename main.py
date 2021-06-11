@@ -5,6 +5,13 @@ DT = float(input("Enter the difference in temperatue between in and out: "))
 EV = int(input("Enter the electric volt value: "))
 
 
+def Read_Filename():
+    base_rules = pd.read_excel('BaseRules.xlsx', engine='openpyxl')
+    base_rules = base_rules.drop([24])
+    print(base_rules)
+    return base_rules
+
+
 def UT_Calculator(UT):
     Low = 0
     Medium = 0
@@ -103,13 +110,6 @@ def Get_Minimums(Combinations, Fuzzy_UT,
     return min_values
 
 
-def Read_Filename():
-    base_rules = pd.read_excel('BaseRules.xlsx', engine='openpyxl')
-    base_rules = base_rules.drop([24])
-    print(base_rules)
-    return base_rules
-
-
 def Check_Output(base_rules, inputs):
     output = []
     for i in range(len(base_rules)):
@@ -158,7 +158,7 @@ def main():
     values = Defuzzification(outputs, minimum_values)
     print('\n')
     print('Compressor Speed =', values[0])
-    print('Fan Speed =', values[0])
+    print('Fan Speed =', values[1])
 
 
 if __name__ == '__main__':
